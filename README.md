@@ -386,6 +386,8 @@ podrían presentar un conflicto. Para evitar este problema puedes crear una nuev
 app usando `create-react-app` y de ahí _mezclarla_ con la carpeta del proyecto:
 
 ```sh
+# clonar el proyecto
+git clone https://github.com/MarytereBenavides/LIM014-burger-queen-api-client.git
 # Si estabas en la carpeta del proyecto, salimos a la carpeta de más arriba
 cd ..
 
@@ -396,10 +398,12 @@ npx create-react-app burger-queen-tmp
 # Copiamos el _boilerplate_ del proyecto _encima_ de la aplicación creada con
 # `create-react-app`
 cp -r <cohort-id>-burger-queen/* burger-queen-tmp/
+------> cp -r LIM014-burger-queen-api-client/* burger-queen-tmp/
 
 # Copiamos el contenido de la aplicación creada con `create-react-app` de vuelta
 # al repo del proyecto (teniendo en cuenta el archivo _oculto_ `.gitignore`).
 cp -r burger-queen-tmp/.gitignore burger-queen-tmp/* <cohort-id>-burger-queen/
+------> cp -r burger-queen-tmp/.gitignore burger-queen-tmp/* LIM014-burger-queen-api-client/
 
 # Ya podemos borrar la instalación _temporal_ y quedarnos solo con el repo del
 # proyecto, con el que partimos.
@@ -408,7 +412,14 @@ rm -rf burger-queen-tmp
 # Volvemos a entrar en el directorio del proyecto y ya deberíamos estar listas
 # para comenzar.
 cd <cohort-id>-burger-queen
+------> cd LIM014-burger-queen-api-client/
 
+# Before you start using Yarn, you'll first need to install it on your system.
+ npm install --global yarn
+
+# Before you start using Yarn, you'll first need to install it on your system.
+ npm install --global yarn
+ 
 # Para confirmar que todo fue bien arranca la aplicación con el siguinte comando
 # y verifica que la interfaz se abre en el navegador.
 yarn start
