@@ -378,6 +378,10 @@ para mantener actualizado el menú.
 * Desplegaste tu aplicación y has etiquetado tu versión (git tag).
 
 ***
+### Prototipo de alta fidelidad
+
+![burger-queen-gif](https://user-images.githubusercontent.com/110297/42118136-996b4a52-7bc6-11e8-8a03-ada078754715.jpg)
+
 ### :information_source: Nota para estudiantes que elijan React y `create-react-app`
 
 Si tratas de usar [`create-react-app`](https://reactjs.org/docs/create-a-new-react-app.html)
@@ -388,6 +392,7 @@ app usando `create-react-app` y de ahí _mezclarla_ con la carpeta del proyecto:
 ```sh
 # clonar el proyecto
 git clone https://github.com/MarytereBenavides/LIM014-burger-queen-api-client.git
+
 # Si estabas en la carpeta del proyecto, salimos a la carpeta de más arriba
 cd ..
 
