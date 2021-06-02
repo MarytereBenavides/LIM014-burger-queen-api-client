@@ -414,6 +414,12 @@ rm -rf burger-queen-tmp
 cd <cohort-id>-burger-queen
 ------> cd LIM014-burger-queen-api-client/
 
+# Before you start using Yarn, you'll first need to install it on your system.
+ npm install --global yarn
+
+# Before you start using Yarn, you'll first need to install it on your system.
+ npm install --global yarn
+ 
 # Para confirmar que todo fue bien arranca la aplicación con el siguinte comando
 # y verifica que la interfaz se abre en el navegador.
 yarn start
