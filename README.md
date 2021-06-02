@@ -380,7 +380,7 @@ para mantener actualizado el menú.
 ***
 ### Prototipo de alta fidelidad
 
-![burger-queen-gif](https://raw.githubusercontent.com/MarytereBenavides/LIM014-burger-queen-api-client/MarytereBenavides-patch-1/src/videos/videoBurger.gif)
+![burger-queen-gif](https://raw.githubusercontent.com/MarytereBenavides/LIM014-burger-queen-api-client/MarytereBenavides-patch-1/src/images/videoBurger.gif)
 
 ### :information_source: Nota para estudiantes que elijan React y `create-react-app`
 
