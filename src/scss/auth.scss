@@ -1,9 +1,17 @@
+@import './variable.scss';
 
+div{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
-.button-big{
-    width: 442px,
-    height: 100px,
-    font-size: 35px,
-    color: $base-color;
-    
+.buttonLogin{
+    width: 442px;
+    height: 100px;
+    font-size: 48px;
+    background-color: $button-color;
+    color: $font-black;
+    border-radius: 20px;
+    border: none;
 }
