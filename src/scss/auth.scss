@@ -1,17 +1,63 @@
-@import './variable.scss';
-
-div{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+@import "./variable.scss";
+.boxFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-.buttonLogin{
-    width: 442px;
-    height: 100px;
-    font-size: 48px;
-    background-color: $button-color;
-    color: $font-black;
-    border-radius: 20px;
-    border: none;
+.intForm {
+  width: 442px;
+  height: 73px;
+  border: 2.5px solid #ff9800;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1.5rem;
+  padding-left: 10px;
+  color: #857A7A;
+}
+.container {
+  @extend .boxFlex;
+  .container__header {
+    @extend .boxFlex;
+  }
+  .container__login {
+    @extend .boxFlex;
+    width: 889px;
+    padding: 20px;
+    height: 75vh;
+    border-radius: 90px 90px 0px 0px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 8px 8px rgba(0, 0, 0, 0.25);
+    background-color: white;
+
+    .container__login-form {
+      @extend .boxFlex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: flex-start;
+      .form-input {
+        @extend .intForm;
+
+      };
+      .form-label{
+          font-family: $roboto;
+          font-size: 1.5rem;
+
+      }
+
+      .form-btnLogin {
+        width: 442px;
+        height: 100px;
+        font-size: 48px;
+        background-color: $button-color;
+        color: $font-black;
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        0px 4px 4px rgba(0, 0, 0, 0.25);
+        margin-top: 70px
+      };
+    }
+
+  }
 }
