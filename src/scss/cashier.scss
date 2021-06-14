@@ -1,0 +1,81 @@
+@import './variable.scss';
+// .accordion{
+//     display:none;
+// }
+
+.orderDetail{
+    display: flex;
+    flex-direction: column;
+    border: 3px solid $button-color;
+    box-sizing: border-box;
+box-shadow: 0px 4px 4px $background-shadow;
+border-radius: 8px;
+margin-top: 21px;
+left: 50vw;
+    width: 43.8vw;
+    height: 82vh;
+position: fixed;
+
+ ul{
+    display: flex;
+    height: 37px;
+    border-bottom: 2px solid black;
+    align-items: center;
+    p{
+        padding-left: 16px;
+        font-size: $font-24px;
+    }
+ }
+
+}
+.orderButton{
+    margin-top: 31px;
+}
+header{
+    background-color:$header;
+    width: 100vw;
+    height: 8.6vh;
+
+    img{
+        max-width: 39.6vw;
+        max-height: 8.7vh;
+        padding-left: 21px;
+        padding-top: 6px;
+    }
+}
+
+main{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    background-color:$background-color;
+    max-width: 93vw;
+    min-height: 670px;
+    margin-top:19px;
+    border-radius: 90px 90px 0px 0px;
+    border: 6px solid $background-stroke;
+    box-shadow: 0px 4px 4px $background-shadow, 0px 8px 8px $background-shadow;
+}
+.buttonOrder{
+    flex-direction: column;
+    grid-gap:8px;
+}
+table{
+    thead{
+        font-size: 18px;
+        width: 160px;
+    }
+    tbody{
+        font-size: 16px;
+    }
+
+}
+.buttonMenu{
+    height: 58px;
+    width: 220px;
+    box-shadow: 0px 4px 4px $background-shadow, 0px 4px $background-shadow;
+    border-radius: 10px;
+    background-color: $base-color;
+}
+.boxButtonMenu{    
+    justify-content: space-evenly;
+}
