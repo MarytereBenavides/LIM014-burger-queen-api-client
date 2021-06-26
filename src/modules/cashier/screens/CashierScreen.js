@@ -1,9 +1,9 @@
 import React, { useReducer, useEffect, useState} from 'react';
 import '../../../scss/cashier.scss';
-import imgMenu from '../../../assets/images/breakfast/amCoffee.png';
 import HeaderSecundary from '../../../environments/headerSecundary';
 import {getProducts} from '../../../services/products.js';
-
+import Product from '../components/item' 
+import CartList from '../components/cartList';
 
 const formReducer = (state, event) => {
  return {
@@ -14,21 +14,62 @@ const formReducer = (state, event) => {
 
 
 function CashierScreen() {
+    // const LOCAL_STORAGE_KEY = "products";
+   
     const [products, setProducts] = useState([]);
+    const [filterProducts, setFilterProducts] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
+
+    function productsType (option){
+        // eslint-disable-next-line default-case
+        switch (option){
+            case "BREAKFAST":
+                const breakfast = products.filter(e => e.type === option);
+                setFilterProducts(breakfast);
+            break;
+            case "LUNCHDINNER/HAMBURGERS":
+                const hamburgers=products.filter(e => e.type === option);
+                setFilterProducts(hamburgers);
+            break;
+            case "LUNCHDINNER/SNACKS":
+                const snacks=products.filter(e => e.type === option);
+                setFilterProducts(snacks);
+            break;
+            case "LUNCHDINNER/DRINKS":
+                const drinks=products.filter(e => e.type === option);
+                setFilterProducts(drinks);
+            break;
+        }
+    }
 
     useEffect(() => {
         getProducts()
         .then ((resp) => {
-            console.log(resp)
-            setProducts(resp)
+                setProducts(resp)
+                const breakfast = resp.filter(e => e.type === "BREAKFAST");
+                setFilterProducts(breakfast);
+                // setFilterProducts(resp) 
+                // productsType("BREAKFAST")
         })
-    
         // return () => {
-        //     // cleanup
+
         // }
     }, [])
 
 
+
+    // useEffect(() => {
+    //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(products))
+    // }, [products])
+
+    // const filterByType= (name) => {
+    //     setCategory(name)
+    // }
+
+
+    
+
+   
 
   const [formData, setFormData] = useReducer(formReducer, {});
 
@@ -39,7 +80,10 @@ function CashierScreen() {
     });
   }
 
-  return console.log(products) ||
+
+
+  
+  return console.log(products)  ||
 
  (
    <div className='waiterView'>
@@ -53,53 +97,27 @@ function CashierScreen() {
                     <input maxLength='19' name="name" onChange={onkeyup}/>
                 </div>
                 <div className='boxButtonMenu'>
-                    <button className='buttonMenu' type="submit">BREAKFAST</button>
-                    <button className='buttonMenu' type="submit">LUNCH / DINNER</button>
+                    <button className='buttonMenu'  type="submit" onClick={() => productsType('BREAKFAST')} >BREAKFAST</button>
+                    {/* <button className='buttonMenu' type="submit" id="buttonDinner" onClick={displayDinner}>LUNCH / DINNER</button> */}
                 </div>
-                <div>
-                    <button className='buttonSubMenu' type="submit">HAMBURGERS</button>
-                    <button className='buttonSubMenu' type="submit">SNACKS</button>                 
-                    <button className='buttonSubMenu' type="submit">DRINKS</button>
+                <div id="buttoncategory" className="">
+                    <button className='buttonSubMenu' type="submit" onClick={() => productsType('LUNCHDINNER/HAMBURGERS')}>HAMBURGERS</button>
+                    <button className='buttonSubMenu' type="submit" onClick={() => productsType('LUNCHDINNER/SNACKS')}>SNACKS</button>                 
+                    <button className='buttonSubMenu' type="submit" onClick={() => productsType('LUNCHDINNER/DRINKS')}>DRINKS</button>
                 </div>           
             </div>
             </section>
             <section>
-                <div>
-                    {products.map((product) => (
-                        <div key={product._id}>
-                        <img src={product.image} width='200px' height='200px' alt='logo' />
-                            <div>
-                                <p>{product.name}</p>
-                                <p>{product.price}</p>
-                                <button className='buttonAdd' type="submit">ADD</button>
-                            </div>
-                    </div>
-                    ))}
-                    <div>
-                        <img src={imgMenu} width='200px' height='200px' alt='logo' />
-                            <div>
-                                <p>American Coffee</p>
-                                <p>$ 5.00</p>
-                                <button className='buttonAdd' type="submit">ADD</button>
-                            </div>
-                    </div>
-                    <div>
-                    <img src={imgMenu} width='200px' height='200px' alt='logo' />
-                            <div>
-                                <p>American Coffee</p>
-                                <p>$ 5.00</p>
-                                <button className='buttonAdd' type="submit">ADD</button>
-                            </div>            
-                    </div>
-                    <div>        
-                        <img src={imgMenu} width='200px' height='200px' alt='logo' />
-                            <div>
-                                <p>American Coffee</p>
-                                <p>$ 5.00</p>
-                                <button className='buttonAdd' type="submit">ADD</button>
-                            </div>
-                    </div>
-            </div>
+                <div className="" id="">
+                    {filterProducts.map((product) => (     
+                       <Product
+                       key = {product._id} 
+                       product={product}
+                       cartItems={cartItems} 
+                       setCartItems={setCartItems}
+                       products={products}/>
+                    ))}        
+                </div>
             </section>
 
             </section>
@@ -109,34 +127,13 @@ function CashierScreen() {
                 <p key={name}>{value.toString()}</p>
             ))}
             </ul>
-            <table  className='tableComponent' > 
-                <thead>
-                    <tr>
-                        <th>product</th>
-                        <th>amount</th>
-                        <th>price</th>
-                        <th>subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>Glass of soda (500ml)</th>
-                        <th>
-                            <button>-</button>
-                            1
-                            <button>+</button>
-                        </th>
-                        <th>$7</th>
-                        <th>$14 </th>
-                    </tr>
-                </tbody>
-               
-                
-            </table>
-            <div>
-            <span>TOTAL </span>
-            <span> $29</span>
-            </div>
+           <CartList 
+           cartItems={cartItems}
+           setCartItems={setCartItems}
+           
+            // handleAddItemToCart={handleAddItemToCart}
+            // handleRemoveItemFromCart={handleRemoveItemFromCart} 
+            />
     
             <button>Done</button>
         </section>

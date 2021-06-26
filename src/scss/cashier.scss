@@ -13,8 +13,8 @@ border-radius: 8px;
 margin-top: 21px;
 left: 50vw;
     width: 43.8vw;
-    height: 82vh;
-position: fixed;
+    height: auto;
+// position: fixed;
 
  ul{
     display: flex;
@@ -78,4 +78,8 @@ table{
 }
 .boxButtonMenu{    
     justify-content: space-evenly;
+}
+
+.hide{
+    display:none;
 }
