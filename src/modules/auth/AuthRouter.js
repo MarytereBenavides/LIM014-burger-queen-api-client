@@ -5,7 +5,7 @@ import AuthLoginScreen from './screens/AuthLoginScreen'
 const AuthRouter = () =>{
     return(
         <Switch>
-            <Route path={"/auth"} component={AuthLoginScreen} />
+            <Route path={"/auth/login"} component={AuthLoginScreen} />
         </Switch>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Switch,Route} from 'react-router-dom'
-import WaiterScreen from './screen/WaiterScreen'
+import WaiterScreen from './screens/WaiterScreen'
 
 const WaiterRouter = () =>{
     return (
