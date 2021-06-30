@@ -1,12 +1,38 @@
 const axios = require('axios');
+const headersHttp = {
+    headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGQ5ZTQzZjIxMzY2ODYzZWNkOWMwNzQiLCJlbWFpbCI6ImFkbWluQGxvY2FsaG9zdC5jb20iLCJyb2xlcyI6eyJhZG1pbiI6dHJ1ZX0sImlhdCI6MTYyNTA5NTQxMiwiZXhwIjoxNjI1MDk5MDEyfQ.xPyWdWYJshQm2lvEZavn-XHdjDWaFm8WDrY4rSXqrdY'
+    }
+}
+
+
 const getProducts = async () => {
-    return await axios.get('http://localhost:4000/products')
-.then( (response) => {
-    console.log(response.data.products)
-    return response.data.products})
-  .catch( (error) => {
-      return error
-  });
+    // return await axios.get('http://localhost:4000/products')
+    const getAllProducts = await axios({ 
+        method: 'GET',
+        url:'https://nodejs-bq-api.herokuapp.com/products',
+            ...headersHttp
+    })
+    return getAllProducts;
+
+ };
+
+
+const createOrder = (order) => {
+ 
+       axios({ 
+        method: 'POST',
+        url:'https://nodejs-bq-api.herokuapp.com/orders',
+
+            ...headersHttp,
+
+        data: {
+            body:{order},
+            userId:1
+        }
+    }).then(res=>console.log(res.data))
+
+
 };
 
 // const filterProducts =() =>{
@@ -14,7 +40,7 @@ const getProducts = async () => {
 //     if()
 // }
 
-export {getProducts} ;
+export {getProducts,createOrder} ;
 
 
 // https://ibb.co/C9qXNH8

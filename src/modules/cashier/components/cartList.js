@@ -1,6 +1,6 @@
 import Product from '../components/item';
 
-const CartList = ({ cartItems, setCartItems, handleAddItemToCart, handleRemoveItemFromCart }) => {
+const CartList = ({ cartItems, setCartItems}) => {
 
 
     const calculeTotal = cartItems.reduce(
@@ -20,15 +20,12 @@ const CartList = ({ cartItems, setCartItems, handleAddItemToCart, handleRemoveIt
                    </tr>
                </thead>
                <tbody>
-                   
-               
-           
                 {cartItems.length === 0 ? (<tr><th colSpan='4'> No hay productos agregados al carrito todavia...</th></tr>) : (cartItems.map((product => <tr><th colSpan='4'>  <Product key={product._id}  product={product} cartItems={cartItems} setCartItems={setCartItems} /></th></tr> )))}
     
                </tbody>
                <tr>
             <th  colSpan='3'>TOTAL </th>
-            <th>{calculeTotal}</th>
+            <th>${calculeTotal}</th>
             </tr>
          
             </table>
