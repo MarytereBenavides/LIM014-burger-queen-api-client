@@ -27,6 +27,7 @@ const AuthLoginScreen = ({history}) => {
     console.log(`Hola mundo`);
     console.log(formLogin);
     postLogin(formLogin.email, formLogin.password).then(res=>{
+      console.log(`Hola token`);
       console.log(res);
       if (res.statusText ==="OK") {
         console.log('Hola postLogin');

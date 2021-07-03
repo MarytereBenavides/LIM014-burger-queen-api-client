@@ -13,5 +13,18 @@ export const postLogin = (email, password)=>{
     return result
 }
 
+export const verifyToken = async (token) => {
+    const result = await axios({
+        method:"GET",
+        url:`${URL_BACKEND}/products`,
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    }
+    )
+    return result 
+}
+
+
 
 

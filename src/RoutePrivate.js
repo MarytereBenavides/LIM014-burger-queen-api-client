@@ -1,9 +1,21 @@
-import React from 'react'
-import {Route} from 'react-router-dom'
+import React, { useContext } from 'react'
+import {Redirect, Route} from 'react-router-dom'
+import AuthContext from './modules/auth/context/authContext'
 
-const RoutePrivate = ({path, component:Component}) => {
+const RoutePrivate = ({path, componente:Componente}) => {
+
+    const {autenticate, loading} = useContext(AuthContext)
+    console.log(`hola autenticado`);
+    console.log(autenticate, loading);
+
     return (
-        <Route path={path} component={Component}/>
+        loading ?
+        <h1>
+            Cargando....
+        </h1> :
+        autenticate ?
+        <Route path={path} component={Componente}/> :
+        <Redirect to={"/"}/>
     )
 }
 

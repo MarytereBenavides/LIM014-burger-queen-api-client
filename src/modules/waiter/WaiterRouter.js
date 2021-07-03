@@ -1,11 +1,12 @@
 import React from 'react'
-import {Switch,Route} from 'react-router-dom'
+import {Switch} from 'react-router-dom'
+import RoutePrivate from '../../RoutePrivate'
 import WaiterScreen from './screens/WaiterScreen'
 
 const WaiterRouter = () =>{
     return (
         <Switch>
-            <Route path={'/'} component={WaiterScreen}/>
+            <RoutePrivate path={'/'} componente={WaiterScreen}/>
         </Switch>
 
     )

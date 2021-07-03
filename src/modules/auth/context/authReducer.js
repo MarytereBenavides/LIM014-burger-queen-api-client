@@ -11,6 +11,16 @@ const AuthReducer = (stateCurrent, action) =>{
                 autenticate:true,
                 loading:false
             }
+        case "CLOSE_SESSION":
+            localStorage.removeItem("gdsldfgkl")
+            return {
+                ...stateCurrent,
+                usuEmail:null,
+                usuId:null,
+                token:null,
+                autenticate:false,
+                loading:false
+            }
     }
 }
 
