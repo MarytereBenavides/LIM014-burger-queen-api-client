@@ -1,11 +1,11 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
-import CaschierScreen from './screens/CashierScreen'
+import CashierScreen from './screens/CashierScreen'
 
 const ChashierRouter = () => {
     return(
         <Switch>
-            <Route path={'/'} component={CaschierScreen}/>
+            <Route path={'/'} component={CashierScreen}/>
         </Switch>
     )
 }
