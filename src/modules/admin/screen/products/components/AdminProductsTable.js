@@ -25,7 +25,6 @@ const AdminProductsTable = () => {
           <thead>
             <tr>
               <th>Category</th>
-              <th>Sub-Category</th>
               <th>Product</th>
               <th>Price</th>
               <th>Img</th>
@@ -36,12 +35,11 @@ const AdminProductsTable = () => {
             {product.map((prod) => (
               <tr key={prod._id}>
                 <td>{prod.name}</td>
-                <td>--</td>
                 <td>{prod.type}</td>
                 <td>$ {prod.price}</td>
                 <td>
-                    <img src={prod.image} width="80" height="80" alt="" />
-                    </td>
+                  <img src={prod.image} width="80" height="80" alt="" />
+                </td>
                 <td>
                   <button>Delete</button>
                   <button>Edit</button>
