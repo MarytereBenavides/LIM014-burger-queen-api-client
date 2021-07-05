@@ -16,7 +16,7 @@ const AppRouter = () => {
             <Switch>
                 <Route path={'/cashier'} component={ChashierRouter}/>
                 <Route path={'/waiter'} component={WaiterRouter}/>
-                <Route path={'/Chef'} component={ChefRouter}/>
+                <Route path={'/chef'} component={ChefRouter}/>
                 <Route path={'/admin'} component={AdminRouter} />
                 <Route path={'/auth'} component={AuthRouter} />
                 <Route path={'/'} exact component={GuestRouter} />

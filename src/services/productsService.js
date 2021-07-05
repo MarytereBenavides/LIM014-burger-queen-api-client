@@ -1,7 +1,8 @@
 import axios from 'axios'
 import {URL_BACKEND} from '../environments/environments'
+const token = localStorage.getItem("gdsldfgkl")
 
-export const getProducts = (token) => {
+export const getProducts = () => {
     
     const result = axios({
         method:"GET",

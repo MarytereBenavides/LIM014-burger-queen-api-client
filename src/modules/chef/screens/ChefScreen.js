@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react'
-import {getOrder} from '../../../services/products.js';
-import { trackPromise} from 'react-promise-tracker';
+// import { trackPromise} from 'react-promise-tracker';
+import { getOrder } from '../../../services/orderService';
 
 
 const ChefScreen = () => {
@@ -8,16 +8,17 @@ const ChefScreen = () => {
 
 
     useEffect(() => {
-      trackPromise(
+      // trackPromise(
         getOrder()
         .then ((resp) => {
         console.log('hola',resp.data)
+        console.log(resp.data.length);
         setOrdersKitchen(resp.data) 
         })
         // return () => {
 
         // }
-      );
+      // );
     }, [])
 
     return console.log(ordersKitchen) ||(
