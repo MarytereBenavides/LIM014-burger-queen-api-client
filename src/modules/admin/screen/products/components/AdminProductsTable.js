@@ -34,7 +34,7 @@ const AdminProductsTable = () => {
           </thead>
           <tbody>
             {product.map((prod) => (
-              <tr>
+              <tr key={prod._id}>
                 <td>{prod.name}</td>
                 <td>--</td>
                 <td>{prod.type}</td>
