@@ -1,7 +1,7 @@
 const axios = require('axios');
 const headersHttp = {
     headers: {
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGQ5ZTQzZjIxMzY2ODYzZWNkOWMwNzQiLCJlbWFpbCI6ImFkbWluQGxvY2FsaG9zdC5jb20iLCJyb2xlcyI6eyJhZG1pbiI6dHJ1ZX0sImlhdCI6MTYyNTA5NTQxMiwiZXhwIjoxNjI1MDk5MDEyfQ.xPyWdWYJshQm2lvEZavn-XHdjDWaFm8WDrY4rSXqrdY'
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGRmMmM2ZjVhNTUyZTAwMTUyODNhMDEiLCJlbWFpbCI6ImFkbWluQGxvY2FsaG9zdC5jb20iLCJyb2xlcyI6eyJhZG1pbiI6dHJ1ZX0sImlhdCI6MTYyNTQ4OTk0NiwiZXhwIjoxNjI1NDkzNTQ2fQ.BxEYNmURxCg71vJtEfI4f8_Lpmglj7Fgf35o-3HExiI'
     }
 }
 
@@ -10,28 +10,34 @@ const getProducts = async () => {
     // return await axios.get('http://localhost:4000/products')
     const getAllProducts = await axios({ 
         method: 'GET',
-        url:'https://nodejs-bq-api.herokuapp.com/products',
+        url:'https://burgerqueen01.herokuapp.com/products?limit=50000&page=1',
             ...headersHttp
     })
     return getAllProducts;
-
  };
 
 
-const createOrder = (order) => {
- 
-       axios({ 
+const createOrder = async (order) => {
+    console.log(order);
+      const result = await axios({ 
         method: 'POST',
-        url:'https://nodejs-bq-api.herokuapp.com/orders',
-
+        url:'https://burgerqueen01.herokuapp.com/orders',
             ...headersHttp,
+        data:order
+    })
 
-        data: {
-            body:{order},
-            userId:1
-        }
-    }).then(res=>console.log(res.data))
+    return result
 
+};
+
+const getOrder = async () => {
+      const getAllOrders = await axios({ 
+        method: 'GET',
+        url:'https://burgerqueen01.herokuapp.com/orders?limit=50000&page=1',
+            ...headersHttp,
+    })
+
+    return getAllOrders
 
 };
 
@@ -40,7 +46,7 @@ const createOrder = (order) => {
 //     if()
 // }
 
-export {getProducts,createOrder} ;
+export {getProducts,createOrder,getOrder} ;
 
 
 // https://ibb.co/C9qXNH8

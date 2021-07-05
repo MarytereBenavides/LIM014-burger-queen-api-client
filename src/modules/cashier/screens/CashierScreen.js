@@ -19,14 +19,27 @@ function CashierScreen() {
     const [products, setProducts] = useState([]);
     const [filterProducts, setFilterProducts] = useState([]);
     const [cartItems, setCartItems] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [showResults, setShowResults] = React.useState(false)
     const [formData, setFormData] = useReducer(formReducer, {});
     const showButtons = () => setShowResults(true)
     const hideButtons = () => setShowResults(false)
     
 
+    useEffect(() => {
+        getProducts()
+        .then ((resp) => {
+        console.log('hola',resp.data)
+                setProducts(resp.data)
+                // const breakfast = resp.filter(e => e.type === "BREAKFAST");
+                // setFilterProducts(breakfast);
+                // setFilterProducts(resp) 
+                // productsType("BREAKFAST")
+        })
+        // return () => {
 
-
+        // }
+    }, [])
 
     function productsType (option){
         // eslint-disable-next-line default-case
@@ -51,23 +64,6 @@ function CashierScreen() {
         }
     }
 
-    useEffect(() => {
-        getProducts()
-        .then ((resp) => {
-        console.log('hola',resp.data)
-                setProducts(resp.data)
-                // const breakfast = resp.filter(e => e.type === "BREAKFAST");
-                // setFilterProducts(breakfast);
-                // setFilterProducts(resp) 
-                // productsType("BREAKFAST")
-        })
-        // return () => {
-
-        // }
-    }, [])
-
-
-
     // useEffect(() => {
     //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(products))
     // }, [products])
@@ -76,28 +72,52 @@ function CashierScreen() {
     //     setCategory(name)
     // }
 
+
+
+
     const sendOrder = () =>{
+        console.log(cartItems)
         if(cartItems.filter((e) => e._id).length>0){
             const products = cartItems.map((e)=> {
-                return { product: e.name, qty: e.qty };
+                return { productId: e._id, qty: e.qty };
                 
             })
             const order={
-                userId:null,
-                client: null,
+                status: "pending",
+                userId:"60d9e43f21366863ecd9c084",
+                client: "c888",
                 products:products,
             }
-            console.log(order)
+            setOrders(order);
+            // console.log(setOrders())
+            // console.log(order)
             alert('orden enviada')
             setCartItems([]);
-            return createOrder(order)
+            
+            // console.log(':c',cartItems)
+            // console.log(':c',setOrders(orders))
+            // createOrder(orders).then(res=>{
+            //     console.log('linea97')
+            //     console.log(res)
+            //     // setOrders(res)
+            //     return res
+        
+            // })
+            console.log(orders)
+            return orders
         }else{
            
         }
-        console.log(sendOrder(createOrder))
     }
 
-
+    useEffect(() => {
+        createOrder(orders).then(res=>{
+            console.log('linea97')
+            console.log(res)
+            // setOrders(res)
+            return res
+        })
+    }, [orders])
     
 
    
