@@ -1,9 +1,10 @@
 import React, { useReducer, useEffect, useState} from 'react';
 import '../../../scss/cashier.scss';
-import HeaderSecundary from '../../../environments/headerSecundary';
-import {getProducts, createOrder} from '../../../services/products.js';
+// import HeaderSecundary from '../../../environments/headerSecundary';
 import Product from '../components/item' 
 import CartList from '../components/cartList';
+import { getProducts } from '../../../services/productsService';
+import { createOrder } from '../../../services/orderService';
 
 const formReducer = (state, event) => {
  return {
@@ -111,6 +112,7 @@ function CashierScreen() {
     }
 
     useEffect(() => {
+    
         createOrder(orders).then(res=>{
             console.log('linea97')
             console.log(res)
@@ -145,7 +147,7 @@ function CashierScreen() {
 
  (
    <div className='waiterView'>
-      <HeaderSecundary />
+      {/* <HeaderSecundary /> */}
        <main >
         <section className='orderButton'>
             <section>
