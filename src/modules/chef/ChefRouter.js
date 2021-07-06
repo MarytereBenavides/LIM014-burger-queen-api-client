@@ -1,14 +1,20 @@
-import React from 'react';
-import {Switch,Route} from 'react-router-dom';
-import ChefScreen from './screens/ChefScreen';
-
+import React from "react";
+import { Switch} from "react-router-dom";
+import RoutePrivate from "../../RoutePrivate";
+import ChefHeader from "./components/ChefHeader";
+import ChefScreen from "./screens/ChefScreen";
 
 const ChefRouter = () => {
-return(
-    <Switch>
-        <Route path={'/'} component={ChefScreen}/>
-    </Switch>
-)
-}
+  return (
+    <>
+      <ChefHeader/>
+      <main>
+        <Switch>
+          <RoutePrivate path={"/"} componente={ChefScreen} />
+        </Switch>
+      </main>
+    </>
+  );
+};
 
 export default ChefRouter;

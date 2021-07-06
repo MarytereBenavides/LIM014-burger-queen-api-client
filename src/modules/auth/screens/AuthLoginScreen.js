@@ -34,12 +34,15 @@ const AuthLoginScreen = ({history}) => {
         console.log(res.data.token);
         startSession(res.data.token)
         console.log(role);
-        if(role){
+        if(role === true){
+          console.log(`hola mundo role`);
           console.log(role);
           history.push("/admin")
         }else if(role === false){
+          
+          console.log(`hola mundo role2`)
           console.log(role);
-          history.push("/chef")
+          history.push("/member")
         }
       }
     })

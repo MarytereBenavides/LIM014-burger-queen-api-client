@@ -6,19 +6,18 @@ import { getOrder } from '../../../services/orderService';
 const ChefScreen = () => {
     const [ordersKitchen, setOrdersKitchen] = useState([]);
 
+    const bringOrder = () => {
+      getOrder()
+      .then( res =>{
+        if (res.statusText === "OK") {
+          setOrdersKitchen(res.data)
+        }
+      })
+    }
+
 
     useEffect(() => {
-      // trackPromise(
-        getOrder()
-        .then ((resp) => {
-        console.log('hola',resp.data)
-        console.log(resp.data.length);
-        setOrdersKitchen(resp.data) 
-        })
-        // return () => {
-
-        // }
-      // );
+      bringOrder()
     }, [])
 
     return console.log(ordersKitchen) ||(

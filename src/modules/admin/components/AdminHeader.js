@@ -1,5 +1,6 @@
 import React from "react";
 import logoBurger from "../../../assets/images/LogoBurger.png";
+import { Link } from "react-router-dom";
 
 const AdminHeader = () => {
   return (
@@ -8,13 +9,19 @@ const AdminHeader = () => {
         <img src={logoBurger} alt="" />
         <ul>
           <li>
-            <a href="!#">WORKERS</a>
+            <Link Link to={"/admin/employees"}>
+              WORKERS
+            </Link>
           </li>
           <li>
-            <a href="!#">PRODUCTS</a>
+            <Link Link to={"/admin/products"}>
+              PRODUCTS
+            </Link>
           </li>
           <li>
-            <a href="!#">SALES</a>
+            <Link Link to={"/admin/products"}>
+              SALES
+            </Link>
           </li>
         </ul>
       </nav>
