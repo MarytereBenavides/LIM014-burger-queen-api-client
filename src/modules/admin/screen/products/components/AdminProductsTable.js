@@ -6,8 +6,8 @@ const AdminProductsTable = () => {
   const [product, setProduct] = useState([]);
   const { token } = useContext(AuthContext);
 
-  const bringProducts = (token) => {
-    getProducts(token).then((res) => {
+  const bringProducts = () => {
+    getProducts().then((res) => {
       console.log(res);
       if (res.statusText === "OK") {
         setProduct(res.data);

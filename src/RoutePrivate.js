@@ -6,7 +6,7 @@ const RoutePrivate = ({path, componente:Componente}) => {
 
     const {autenticate, loading} = useContext(AuthContext)
     console.log(`hola autenticado`);
-    console.log(autenticate, loading);
+    // console.log(autenticate, loading);
 
     return (
         loading ?
