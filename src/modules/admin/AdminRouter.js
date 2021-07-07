@@ -1,13 +1,19 @@
-import React from "react";
-import { Switch } from "react-router-dom";
+import React, { useContext } from "react";
+import { Redirect, Switch } from "react-router-dom";
 import RoutePrivate from "../../RoutePrivate";
+import AuthContext from "../auth/context/authContext";
 import AdminHeader from "./components/AdminHeader";
 import AdminDashboardScreen from "./screen/dashboard/AdminDashboardScreen";
 import AdminEmployeesScreen from "./screen/employees/AdminEmployeesScreen";
 import AdminProductsScreen from "./screen/products/AdminProductsScreen";
 
+
 const AdminRouter = () => {
+  const {role} = useContext(AuthContext)
+  console.log(role);
+  
   return (
+    role ?
     <>
     <AdminHeader/>
     <main className="container">
@@ -17,8 +23,9 @@ const AdminRouter = () => {
       <RoutePrivate path={'/admin'} componente={AdminDashboardScreen}/>
     </Switch>
     </main>
-    
-    </>
+    </> :
+    <Redirect to = {'/member'} />
+
   );
 };
 

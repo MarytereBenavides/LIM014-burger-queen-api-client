@@ -1,13 +1,21 @@
-import React from 'react';
-import {Switch,Route} from 'react-router-dom';
-import CashierScreen from './screens/CashierScreen'
+import React from 'react'
+import { Switch } from "react-router-dom";
+import RoutePrivate from "../../RoutePrivate";
+import CashierScreen from "./screens/CashierScreen";
+import CashierHeader from './components/CashierHeader';
 
-const ChashierRouter = () => {
-    return(
-        <Switch>
-            <Route path={'/'} component={CashierScreen}/>
-        </Switch>
-    )
+const CashierRouter = () => {
+  return (
+    <>
+    <CashierHeader/>
+    <div>
+      <Switch>
+        <RoutePrivate path={"/"} componente={CashierScreen} />
+      </Switch>
+    </div>
+  </>
+  )
 }
 
-export default ChashierRouter;
+export default CashierRouter
+
