@@ -28,3 +28,29 @@ export const getOrder = async () => {
     return result
 }
 
+
+export const putOrder = async (order,orderId) => {
+    const result = await axios({
+        method:"PUT",
+        url:`${URL_BACKEND}/orders/${orderId}`,
+        headers:{
+            Authorization: `Bearer ${token}`
+        },
+        data:order
+    })
+    console.log(`MODIICAR ORDEN`,result.data.products);
+    return result
+}
+
+export const deleteOrder = async (order,orderId) => {
+    const result = await axios({
+        method:"DELETE",
+        url:`${URL_BACKEND}/orders/${orderId}`,
+        headers:{
+            Authorization: `Bearer ${token}`
+        },
+        data:order
+    })
+    console.log(`MODIICAR ORDEN`,result.data.products);
+    return result
+}
