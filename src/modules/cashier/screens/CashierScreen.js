@@ -1,10 +1,12 @@
-import React, { useReducer, useEffect, useState} from 'react';
+import React, { useReducer, useEffect, useState, useContext} from 'react';
 import '../../../scss/cashier.scss';
 // import HeaderSecundary from '../../../environments/headerSecundary';
-import Product from '../components/item' 
+import Product from '@modules/cashier/components/item' 
 import CartList from '../components/cartList';
 import { getProducts } from '../../../services/productsService';
 import { createOrder } from '../../../services/orderService';
+// import AuthState from '../../auth/context/authState'
+import AuthContex from '../../auth/context/authContext'
 
 const formReducer = (state, event) => {
  return {
@@ -25,7 +27,7 @@ function CashierScreen() {
     const [formData, setFormData] = useReducer(formReducer, {});
     const showButtons = () => setShowResults(true)
     const hideButtons = () => setShowResults(false)
-    
+    const {usuId} = useContext(AuthContex)
 
     useEffect(() => {
         getProducts()
@@ -73,20 +75,29 @@ function CashierScreen() {
     //     setCategory(name)
     // }
 
+    const onkeyup = event => {
+        setFormData({
+          name: event.target.name,
+          value: event.target.value,
+        });
+        console.log(formData)
+      }
 
-
+     
 
     const sendOrder = () =>{
         console.log(cartItems)
+        console.log(formData)
         if(cartItems.filter((e) => e._id).length>0){
             const products = cartItems.map((e)=> {
                 return { productId: e._id, qty: e.qty };
                 
             })
+            const client =  formData.name;
             const order={
                 status: "pending",
-                userId:"60d9e43f21366863ecd9c084",
-                client: "c888",
+                userId: usuId,
+                client: client,
                 products:products,
             }
             setOrders(order);
@@ -126,13 +137,13 @@ function CashierScreen() {
 
   
 
-  const onkeyup = event => {
-    setFormData({
-      name: event.target.name,
-      value: event.target.value,
-    });
-    console.log(formData)
-  }
+//   const onkeyup = event => {
+//     setFormData({
+//       name: event.target.name,
+//       value: event.target.value,
+//     });
+//     console.log(formData)
+//   }
   
   const Results = () => (
     <div id="results">
