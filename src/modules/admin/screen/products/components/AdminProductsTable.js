@@ -1,22 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getProducts } from "../../../../../services/productsService";
-import AuthContext from "../../../../auth/context/authContext";
+import React from "react";
 
-const AdminProductsTable = () => {
-  const [product, setProduct] = useState([]);
-  const { token } = useContext(AuthContext);
 
-  const bringProducts = () => {
-    getProducts().then((res) => {
-      console.log(res);
-      if (res.statusText === "OK") {
-        setProduct(res.data);
-      }
-    });
-  };
-  useEffect(() => {
-    bringProducts(token);
-  }, []);
+const AdminProductsTable = ({product}) => {
+  
+  // const { token } = useContext(AuthContext);
+
+
   return (
     <div>
       <section>
@@ -41,8 +30,8 @@ const AdminProductsTable = () => {
                   <img src={prod.image} width="80" height="80" alt="" />
                 </td>
                 <td>
-                  <button>Delete</button>
                   <button>Edit</button>
+                  <button>Delete</button>
                 </td>
               </tr>
             ))}
