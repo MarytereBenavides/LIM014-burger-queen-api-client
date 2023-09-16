@@ -9,22 +9,22 @@ import AdminProductsScreen from "./screen/products/AdminProductsScreen";
 
 
 const AdminRouter = () => {
-  const {role} = useContext(AuthContext)
+  const { role } = useContext(AuthContext)
   console.log(role);
-  
+
   return (
     role ?
-    <>
-    <AdminHeader/>
-    <main className="container">
-    <Switch>
-      <RoutePrivate path={"/admin/products"} componente={AdminProductsScreen}/>
-      <RoutePrivate path={"/admin/employees"} componente={AdminEmployeesScreen}/>
-      <RoutePrivate path={'/admin'} componente={AdminDashboardScreen}/>
-    </Switch>
-    </main>
-    </> :
-    <Redirect to = {'/member'} />
+      <>
+        <AdminHeader />
+        <main className="container">
+          <Switch>
+            <RoutePrivate path={"/admin/products"} componente={AdminProductsScreen} />
+            <RoutePrivate path={"/admin/employees"} componente={AdminEmployeesScreen} />
+            <RoutePrivate path={'/admin'} componente={AdminDashboardScreen} />
+          </Switch>
+        </main>
+      </> :
+      <Redirect to={'/member'} />
 
   );
 };

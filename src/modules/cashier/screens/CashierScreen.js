@@ -1,7 +1,8 @@
-import React, { useReducer, useEffect, useState, useContext} from 'react';
+import React, { useReducer, useEffect, useState, useContext } from 'react';
 import '../../../scss/cashier.scss';
 // import HeaderSecundary from '../../../environments/headerSecundary';
-import Product from '@modules/cashier/components/item' 
+// import Product from '@modules/cashier/components/item'
+import Product from '../components/item';
 import CartList from '../components/cartList';
 import { getProducts } from '../../../services/productsService';
 import { createOrder } from '../../../services/orderService';
@@ -9,16 +10,16 @@ import { createOrder } from '../../../services/orderService';
 import AuthContex from '../../auth/context/authContext'
 
 const formReducer = (state, event) => {
- return {
-   ...state,
-   [event.name]: event.value
- }
+    return {
+        ...state,
+        [event.name]: event.value
+    }
 }
 
 
 function CashierScreen() {
     // const LOCAL_STORAGE_KEY = "products";
-   
+
     const [products, setProducts] = useState([]);
     const [filterProducts, setFilterProducts] = useState([]);
     const [cartItems, setCartItems] = useState([]);
@@ -27,43 +28,43 @@ function CashierScreen() {
     const [formData, setFormData] = useReducer(formReducer, {});
     const showButtons = () => setShowResults(true)
     const hideButtons = () => setShowResults(false)
-    const {usuId} = useContext(AuthContex)
+    const { usuId } = useContext(AuthContex)
 
     useEffect(() => {
         getProducts()
-        .then ((resp) => {
-        console.log('hola',resp.data)
+            .then((resp) => {
+                console.log('hola', resp.data)
                 setProducts(resp.data)
                 // const breakfast = resp.filter(e => e.type === "BREAKFAST");
                 // setFilterProducts(breakfast);
                 // setFilterProducts(resp) 
                 // productsType("BREAKFAST")
-        })
+            })
         // return () => {
 
         // }
     }, [])
 
-    function productsType (option){
+    function productsType(option) {
         // eslint-disable-next-line default-case
-        switch (option){
+        switch (option) {
             case "BREAKFAST":
-                const breakfast = products.filter(e => e.type === option) ;
+                const breakfast = products.filter(e => e.type === option);
                 setFilterProducts(breakfast);
                 hideButtons();
-            break;
+                break;
             case "LUNCHDINNER/HAMBURGERS":
-                const hamburgers=products.filter(e => e.type === option);
+                const hamburgers = products.filter(e => e.type === option);
                 setFilterProducts(hamburgers);
-            break;
+                break;
             case "LUNCHDINNER/SNACKS":
-                const snacks=products.filter(e => e.type === option);
+                const snacks = products.filter(e => e.type === option);
                 setFilterProducts(snacks);
-            break;
+                break;
             case "LUNCHDINNER/DRINKS":
-                const drinks=products.filter(e => e.type === option);
+                const drinks = products.filter(e => e.type === option);
                 setFilterProducts(drinks);
-            break;
+                break;
         }
     }
 
@@ -77,35 +78,35 @@ function CashierScreen() {
 
     const onkeyup = event => {
         setFormData({
-          name: event.target.name,
-          value: event.target.value,
+            name: event.target.name,
+            value: event.target.value,
         });
         console.log(formData)
-      }
+    }
 
-     
 
-    const sendOrder = () =>{
+
+    const sendOrder = () => {
         console.log(cartItems)
         console.log(formData)
-        if(cartItems.filter((e) => e._id).length>0){
-            const products = cartItems.map((e)=> {
+        if (cartItems.filter((e) => e._id).length > 0) {
+            const products = cartItems.map((e) => {
                 return { productId: e._id, qty: e.qty };
-                
+
             })
-            const client =  formData.name;
-            const order={
+            const client = formData.name;
+            const order = {
                 status: "pending",
                 userId: usuId,
                 client: client,
-                products:products,
+                products: products,
             }
             setOrders(order);
             // console.log(setOrders())
             // console.log(order)
             alert('orden enviada')
             setCartItems([]);
-            
+
             // console.log(':c',cartItems)
             // console.log(':c',setOrders(orders))
             // createOrder(orders).then(res=>{
@@ -113,100 +114,100 @@ function CashierScreen() {
             //     console.log(res)
             //     // setOrders(res)
             //     return res
-        
+
             // })
             console.log(orders)
             return orders
-        }else{
-           
+        } else {
+
         }
     }
 
     useEffect(() => {
-    
-        createOrder(orders).then(res=>{
+
+        createOrder(orders).then(res => {
             console.log('linea97')
             console.log(res)
             // setOrders(res)
             return res
         })
     }, [orders])
-    
 
-   
 
-  
 
-//   const onkeyup = event => {
-//     setFormData({
-//       name: event.target.name,
-//       value: event.target.value,
-//     });
-//     console.log(formData)
-//   }
-  
-  const Results = () => (
-    <div id="results">
-                    <button className='buttonSubMenu' type="submit" onClick={() => productsType('LUNCHDINNER/HAMBURGERS')}>HAMBURGERS</button>
-                    <button className='buttonSubMenu' type="submit" onClick={() => productsType('LUNCHDINNER/SNACKS')}>SNACKS</button>                 
-                    <button className='buttonSubMenu' type="submit" onClick={() => productsType('LUNCHDINNER/DRINKS')}>DRINKS</button>
-                      
-    </div>
-  )
-  
-  return console.log(products) || console.log(cartItems) ||
 
- (
-   <div className='waiterView'>
-      {/* <HeaderSecundary /> */}
-       <main >
-        <section className='orderButton'>
-            <section>
-            <div className='buttonOrder'  >
-                <div>
-                    <label>CLIENT :</label>
-                    <input maxLength='19' name="name" onChange={onkeyup}/>
-                </div>
-                <div className='boxButtonMenu'>
-                    <button className='buttonMenu'  type="submit" onClick={() => {productsType('BREAKFAST')}} >BREAKFAST</button>
-                    <button className='buttonMenu' type="submit" id="buttonDinner" onClick={showButtons} >LUNCH / DINNER</button>
-                </div>
-                { showResults ? <Results /> : null }
+
+
+    //   const onkeyup = event => {
+    //     setFormData({
+    //       name: event.target.name,
+    //       value: event.target.value,
+    //     });
+    //     console.log(formData)
+    //   }
+
+    const Results = () => (
+        <div id="results">
+            <button className='buttonSubMenu' type="submit" onClick={() => productsType('LUNCHDINNER/HAMBURGERS')}>HAMBURGERS</button>
+            <button className='buttonSubMenu' type="submit" onClick={() => productsType('LUNCHDINNER/SNACKS')}>SNACKS</button>
+            <button className='buttonSubMenu' type="submit" onClick={() => productsType('LUNCHDINNER/DRINKS')}>DRINKS</button>
+
+        </div>
+    )
+
+    return console.log(products) || console.log(cartItems) ||
+
+        (
+            <div className='waiterView'>
+                {/* <HeaderSecundary /> */}
+                <main >
+                    <section className='orderButton'>
+                        <section>
+                            <div className='buttonOrder'  >
+                                <div>
+                                    <label>CLIENT :</label>
+                                    <input maxLength='19' name="name" onChange={onkeyup} />
+                                </div>
+                                <div className='boxButtonMenu'>
+                                    <button className='buttonMenu' type="submit" onClick={() => { productsType('BREAKFAST') }} >BREAKFAST</button>
+                                    <button className='buttonMenu' type="submit" id="buttonDinner" onClick={showButtons} >LUNCH / DINNER</button>
+                                </div>
+                                {showResults ? <Results /> : null}
+                            </div>
+                        </section>
+                        <section>
+                            <div className="" id="">
+                                {filterProducts.map((product) => (
+                                    <Product
+                                        key={product._id}
+                                        product={product}
+                                        cartItems={cartItems}
+                                        setCartItems={setCartItems}
+                                        products={products} />
+                                ))}
+                            </div>
+                        </section>
+
+                    </section>
+                    <section className='orderDetail'>
+                        <ul>
+                            {Object.entries(formData).map(([name, value]) => (
+                                <p id="clientName" key={name}>{value.toString()}</p>
+                            ))}
+                        </ul>
+                        <CartList
+                            cartItems={cartItems}
+                            setCartItems={setCartItems}
+                        />
+
+                        <button onClick={sendOrder} >Done</button>
+                    </section>
+                </main>
             </div>
-            </section>
-            <section>
-                <div className="" id="">
-                    {filterProducts.map((product) => (     
-                       <Product
-                       key = {product._id} 
-                       product={product}
-                       cartItems={cartItems} 
-                       setCartItems={setCartItems}
-                       products={products}/>
-                    ))}        
-                </div>
-            </section>
 
-            </section>
-        <section className='orderDetail'>
-            <ul> 
-            {Object.entries(formData).map(([name, value]) => (
-                <p id="clientName" key={name}>{value.toString()}</p>
-            ))}
-            </ul>
-           <CartList 
-           cartItems={cartItems}
-           setCartItems={setCartItems}
-            />
-    
-            <button onClick={sendOrder} >Done</button>
-        </section>
-    </main>
-   </div>
- 
-  )
+        )
 
-  
+
 }
 
 export default CashierScreen;
