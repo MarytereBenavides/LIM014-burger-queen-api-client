@@ -6,7 +6,6 @@ import { postLogin } from "../../../services/authService";
 import AuthContext from "../context/authContext";
 
 const AuthLoginScreen = ({ history }) => {
-
   const { startSession, role } = useContext(AuthContext)
   const [formLogin, setFormLogin] = useState({
     email: "",
@@ -27,28 +26,16 @@ const AuthLoginScreen = ({ history }) => {
     console.log(`Hola mundo`);
     console.log(formLogin);
     postLogin(formLogin.email, formLogin.password).then(res => {
-      console.log(`Hola token`);
-      console.log(res);
-
-      console.log(role);
-      if (role === true) {
-        console.log(`hola mundo role`);
-        console.log(role);
-        history.push("/admin")
-      } else if (role === false) {
-
-        console.log(`hola mundo role2`)
-        console.log(role);
-        history.push("/member")
-
-      }
+      history.push("/admin")
     })
   }
 
   return (
-    <div className="container">
+    <div className="container box">
       <header className="container__header">
-        <img src={logo} width="750" height="157.43" alt="logo" />
+        <h1 className='titleCenter' style={{ "color": "white" }}>
+          Restaurante Lydemar
+        </h1>
       </header>
       <main className="container__login">
         <form
@@ -73,8 +60,8 @@ const AuthLoginScreen = ({ history }) => {
             onChange={handleChange}
             value={formLogin.password}
           />
-          <div>
-            <button className="form-btnLogin" type="submit">
+          <div style={{ "alignSelf": "center" }}>
+            <button className="form-btnLogin" type="submit" >
               Submit
             </button>
           </div>

@@ -1,13 +1,11 @@
 import React, { useReducer, useEffect, useState, useContext } from 'react';
-import '../../../scss/cashier.scss';
-// import HeaderSecundary from '../../../environments/headerSecundary';
-// import Product from '@modules/cashier/components/item'
+
 import Product from '../components/item';
 import CartList from '../components/cartList';
 import { getProducts } from '../../../services/productsService';
 import { createOrder } from '../../../services/orderService';
-// import AuthState from '../../auth/context/authState'
 import AuthContex from '../../auth/context/authContext'
+import { Timestamp } from 'firebase/firestore';
 
 const formReducer = (state, event) => {
     return {
@@ -18,7 +16,6 @@ const formReducer = (state, event) => {
 
 
 function CashierScreen() {
-    // const LOCAL_STORAGE_KEY = "products";
 
     const [products, setProducts] = useState([]);
     const [filterProducts, setFilterProducts] = useState([]);
@@ -33,16 +30,11 @@ function CashierScreen() {
     useEffect(() => {
         getProducts()
             .then((resp) => {
-                console.log('hola', resp.data)
-                setProducts(resp.data)
-                // const breakfast = resp.filter(e => e.type === "BREAKFAST");
-                // setFilterProducts(breakfast);
-                // setFilterProducts(resp) 
-                // productsType("BREAKFAST")
+                console.log('hola', resp)
+                setProducts(resp)
+                const breakfast = resp.filter(e => e.type === "BREAKFAST");
+                setFilterProducts(breakfast);
             })
-        // return () => {
-
-        // }
     }, [])
 
     function productsType(option) {
@@ -68,14 +60,6 @@ function CashierScreen() {
         }
     }
 
-    // useEffect(() => {
-    //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(products))
-    // }, [products])
-
-    // const filterByType= (name) => {
-    //     setCategory(name)
-    // }
-
     const onkeyup = event => {
         setFormData({
             name: event.target.name,
@@ -86,65 +70,31 @@ function CashierScreen() {
 
 
 
-    const sendOrder = () => {
-        console.log(cartItems)
-        console.log(formData)
+    const sendOrder = async () => {
         if (cartItems.filter((e) => e._id).length > 0) {
             const products = cartItems.map((e) => {
-                return { productId: e._id, qty: e.qty };
+                return { productId: e._id, qty: e.qty, name: e.name };
 
             })
             const client = formData.name;
             const order = {
+                _id: Math.random().toString(36),
                 status: "pending",
                 userId: usuId,
                 client: client,
                 products: products,
+                dateEntry: Timestamp.fromDate(new Date()),
             }
             setOrders(order);
-            // console.log(setOrders())
-            // console.log(order)
+            console.log('linea 97', order)
+            await createOrder(order)
             alert('orden enviada')
             setCartItems([]);
-
-            // console.log(':c',cartItems)
-            // console.log(':c',setOrders(orders))
-            // createOrder(orders).then(res=>{
-            //     console.log('linea97')
-            //     console.log(res)
-            //     // setOrders(res)
-            //     return res
-
-            // })
-            console.log(orders)
             return orders
         } else {
-
+            alert('La orden no se envio')
         }
     }
-
-    useEffect(() => {
-
-        createOrder(orders).then(res => {
-            console.log('linea97')
-            console.log(res)
-            // setOrders(res)
-            return res
-        })
-    }, [orders])
-
-
-
-
-
-
-    //   const onkeyup = event => {
-    //     setFormData({
-    //       name: event.target.name,
-    //       value: event.target.value,
-    //     });
-    //     console.log(formData)
-    //   }
 
     const Results = () => (
         <div id="results">
@@ -160,13 +110,13 @@ function CashierScreen() {
         (
             <div className='waiterView'>
                 {/* <HeaderSecundary /> */}
-                <main >
+                <main className='boxMain' >
                     <section className='orderButton'>
                         <section>
                             <div className='buttonOrder'  >
                                 <div>
                                     <label>CLIENT :</label>
-                                    <input maxLength='19' name="name" onChange={onkeyup} />
+                                    <input maxLength='19' name="name" onChange={onkeyup} required />
                                 </div>
                                 <div className='boxButtonMenu'>
                                     <button className='buttonMenu' type="submit" onClick={() => { productsType('BREAKFAST') }} >BREAKFAST</button>
@@ -200,7 +150,7 @@ function CashierScreen() {
                             setCartItems={setCartItems}
                         />
 
-                        <button onClick={sendOrder} >Done</button>
+                        <button onClick={sendOrder} className="buttonAdd form-btnLogin borderRadiousNone">Done</button>
                     </section>
                 </main>
             </div>

@@ -6,13 +6,17 @@ const ChefHeader = () => {
   return (
     <div>
       <nav>
-        <img src={logoBurger} alt="" />
-        <ul>
+        <header className="container__header">
+          <h1 className='titleCenter' style={{ "color": "white" }}>
+            Restaurante Lydemar
+          </h1>
+        </header>
+        <ul className="list_options">
           <li>
-            <Link to={"/member"}>Menu</Link>
+            <Link to={"/member"} className="form-btnLogin">Menu</Link>
           </li>
           <li>
-            <a href="!#">LogOut</a>
+            <a href="/" className="form-btnLogin ">LogOut</a>
           </li>
         </ul>
       </nav>

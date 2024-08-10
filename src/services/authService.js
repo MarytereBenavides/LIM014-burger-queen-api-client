@@ -1,9 +1,12 @@
 import axios from 'axios';
 // import { URL_BACKEND } from './../environments/environments'
-import { auth } from './firebaseConfig'
+import { signInFirebase, validateUserFirebase } from './firebaseConfig'
+
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-export const postLogin = (email, password) => {
+
+export const postLogin = async (email, password) => {
+
     // const result = axios({
     //     method:"POST",
     //     url:`${URL_BACKEND}/auth`,
@@ -13,17 +16,11 @@ export const postLogin = (email, password) => {
     //     }
     // })
     // return result
-    return new Promise((resolve, reject) => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                resolve(user);
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                reject(errorMessage);
-            });
-    });
+    const loginData = await signInFirebase(email, password);
+    localStorage.setItem("tokenLydemarExpress", loginData.uid)
+    // const dataUser = await validateUserFirebase(loginData.uid)
+
+    return { name: loginData.displayName, email: loginData.email, uid: loginData.uid };
 }
 
 export const verifyToken = async (token) => {

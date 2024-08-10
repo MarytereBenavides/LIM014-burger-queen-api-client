@@ -451,3 +451,6 @@ yarn start
 * [Tu primera Progressive Web App - Google developers](https://developers.google.com/web/fundamentals/codelabs/your-first-pwapp/?hl=es)
 * [Progressive Web Apps - codigofacilito.com](https://codigofacilito.com/articulos/progressive-apps)
 * [Usando Service Workers - MDN](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API/Using_Service_Workers)
+
+
+ npm start
